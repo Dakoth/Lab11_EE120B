@@ -8,13 +8,13 @@
  *	code, is my own original work.
  */
 #include <avr/io.h>
-//#include "keypad.h"
-#include "bit.h"
+#include "keypad.h"
+//#include "bit.h"
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
 #endif
 
-
+/*
 unsigned char GetKeypadKey() { 
 	PORTC = 0xEF;
 	asm("nop");
@@ -52,7 +52,7 @@ unsigned char GetKeypadKey() {
 
 	return ('\0'); //default value 
 }
-		
+*/		
 
 
 int main(void) {

@@ -27,23 +27,34 @@
 //unsigned char msg[] = " !YRAD ti for tiaw ...dnegeL si B021SC";
 //unsigned char tmp[50] = "";
 
-//unsigned char i = 1;
+unsigned char i = 1;
 //unsigned char i = 38; //size of the message array 
-//unsigned char j = 0;
+//unsigned char j = 1;
 //end of shared variables 
 
+const unsigned char phrase[67]={' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','C','S','1','2','0','B',' ','i','s',' ','L','e','g','e','n','d','.','.','.','w','a','i','t',' ','f','o','r',' ','i','t',' ','D','A','R','Y','!',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '};
 
-enum message { Start, mess_message };
+
+enum message { /*Start*/, mess_message };
 int messageSMTick(int state) {
 	switch(state) { //transitions 
-		case Start:
-			LCD_Cursor(j);
-			LCD_WriteData(msg[i]);
-			break; 
+		//case Start:
+		//	LCD_Cursor(j);
+		//	LCD_WriteData(msg[i]);
+		//	break; 
 
 		case mess_message:
 			state = mess_message;
 
+			for(int j = 1; j <= 16; j++){
+				LCD_Cursor(j);
+				LCD_WriteData(phrase[i+j-2]);
+				if(i+j+1 == 69){
+					i = 1;
+				}
+		
+			}
+			i++;
 			/*
 			if(msg[i] != '\0') { //If haven't reached null char.
 				if (j >= 16) { //If reach end of first row?
@@ -90,50 +101,6 @@ int messageSMTick(int state) {
 	}
 	return state; 
 }
-
-
-/*
-enum keypad_States {keypad_keypad} ;
-int keypadSMTick(int state) {    	
-	x = GetKeypadKey(); 
-
-	switch(state) {
-		case keypad_keypad:
-			state = keypad_keypad;
-
-			switch (x) {
-				case '\0': tmpB = 0x1F; break;
-				case '1': tmpB = 0x01; break; 
-				case '2': tmpB = 0x02; break;
-				case '3': tmpB = 0x03; break; 
-				case '4': tmpB = 0x04; break;
-				case '5': tmpB = 0x05; break; 
-				case '6': tmpB = 0x06; break;
-				case '7': tmpB = 0x07; break; 
-				case '8': tmpB = 0x08; break;
-				case '9': tmpB = 0x09; break; 
-				case 'A': tmpB = 0x0A; break;
-				case 'B': tmpB = 0x0B; break; 
-				case 'C': tmpB = 0x0C; break;
-				case 'D': tmpB = 0x0D; break; 
-				case '*': tmpB = 0x0E; break;
-				case '0': tmpB = 0x00; break; 
-				case '#': tmpB = 0x0F; break;
-				default: tmpB = 0x1B; break; //should never occur, middle led
-		
-				}
-			break;
-
-		default: 
-			state = keypad_keypad;
-			break;
-		}
-		//switch (state) PROBABLY NONE NEEDED
-		//
-
-       		return state; 	
-}
-*/
 
 //display 
 enum display_States { display_display }; 

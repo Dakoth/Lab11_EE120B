@@ -18,12 +18,52 @@
 #include "simAVRHeader.h"
 #endif
 
+
 //Shared variables 
+unsigned char tmpB = 0x00; 
+unsigned char x = 0;
+//end of shared variables 
 
+enum keypad_States {keypad_keypad} ;
+int keypadSMTick(int state) {    	
+	x = GetKeypadKey(); 
 
-//end of shared variables
+	switch(state) {
+		case keypad_keypad:
+			state = keypad_keypad;
 
+			switch (x) {
+				case '\0': tmpB = 0x1F; break;
+				case '1': tmpB = 0x01; break; 
+				case '2': tmpB = 0x02; break;
+				case '3': tmpB = 0x03; break; 
+				case '4': tmpB = 0x04; break;
+				case '5': tmpB = 0x05; break; 
+				case '6': tmpB = 0x06; break;
+				case '7': tmpB = 0x07; break; 
+				case '8': tmpB = 0x08; break;
+				case '9': tmpB = 0x09; break; 
+				case 'A': tmpB = 0x0A; break;
+				case 'B': tmpB = 0x0B; break; 
+				case 'C': tmpB = 0x0C; break;
+				case 'D': tmpB = 0x0D; break; 
+				case '*': tmpB = 0x0E; break;
+				case '0': tmpB = 0x00; break; 
+				case '#': tmpB = 0x0F; break;
+				default: tmpB = 0x1B; break; //should never occur, middle led
+		
+				}
+			break;
 
+		default: 
+			state = keypad_keypad;
+			break;
+		}
+		//switch (state) PROBABLY NONE NEEDED
+		//
+
+       		return state; 	
+}
 
 
 

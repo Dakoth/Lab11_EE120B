@@ -22,26 +22,58 @@
 //unsigned char tmpB = 0x00; 
 //unsigned char x = 0;
 
-unsigned char msg[] = "CS120B is Legend... wait for it DARY!"; //msg
-unsigned char tmp[50] = "";
+//unsigned char msg[] = " CS120B is Legend... wait for it DARY!"; //msg
 
-unsigned char i = 0;
+//unsigned char msg[] = " !YRAD ti for tiaw ...dnegeL si B021SC";
+//unsigned char tmp[50] = "";
+
+//unsigned char i = 1;
+//unsigned char i = 38; //size of the message array 
+//unsigned char j = 0;
 //end of shared variables 
 
 
-enum message { mess_message };
+enum message { Start, mess_message };
 int messageSMTick(int state) {
 	switch(state) { //transitions 
+		case Start:
+			LCD_Cursor(j);
+			LCD_WriteData(msg[i]);
+			break; 
+
 		case mess_message:
 			state = mess_message;
 
+			/*
 			if(msg[i] != '\0') { //If haven't reached null char.
-				LCD_Cursor(14);
-				LCD_writeData(msg[i]);
+				if (j >= 16) { //If reach end of first row?
+					j = 0;	
+				}
+				//originally 14 - j
+
+				//Places first value before
+				LCD_Cursor(16 - j );
+				LCD_WriteData(msg[i]);
+
+				//places second value after 
+				LCD_Cursor(16 - 1 - j);
+				LCD_WriteData(msg[i - 1]);
+
+
+				//writes a null char right before the current thing
+				//LCD_Cursor(16 - j);
+			//	LCD_WriteData(msg[i+1]);
+				//LCD_DisplayString(1, msg[i]);
+				
 			}	
 			else {
-				i = 0;
+				i = 1;
+				//i = 38;
+
+				//j = 0;
 			}
+
+			*/
 			break;
 
 		default: 
@@ -51,7 +83,9 @@ int messageSMTick(int state) {
 
 	switch (state) { //actions
 		case mess_message:
-			i++;
+			//i++;
+			//i--;
+			//j++;
 			break;
 	}
 	return state; 
@@ -148,7 +182,7 @@ int main(void) {
 
 	//task 1 (message)
 	task1.state = start; //inital state task 
-	task1.period = 100;	//task period 
+	task1.period = 500;	//task period 
 	task1.elapsedTime = task1.period; //task current elapsed time 
 	task1.TickFct = &messageSMTick; //Function pointer
 

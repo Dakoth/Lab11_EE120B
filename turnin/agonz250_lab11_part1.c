@@ -1,11 +1,12 @@
 /*	Author: agonz250
  *  Partner(s) Name: 
  *	Lab Section:
- *	Assignment: Lab #11  Exercise #
+ *	Assignment: Lab #11  Exercise #1
  *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
+ *	VIDEO link: https://drive.google.com/open?id=1Toovayv_LTJbn_IUa7IEDfQfJF5R06sp
  */
 #include <avr/io.h>
 #include "keypad.h"

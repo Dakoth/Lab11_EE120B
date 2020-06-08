@@ -19,40 +19,13 @@
 #endif
 
 //Shared variables 
-unsigned char msg[] = "                CS120B is Legend... wait for it DARY!                "; 
 
-unsigned char i = 1;
-//end of shared variables 
 
-enum message { mess_message };
-int messageSMTick(int state) {
-	switch(state) { //transitions 
-		case mess_message:
-			state = mess_message;
+//end of shared variables
 
-			for(int j = 1; j <= 16; j++){
-				LCD_Cursor(j);
-				LCD_WriteData(msg[i+j-2]);
 
-				if(i+j+1 == 69){ //if reaches end of array
-					i = 1;
-				}
-		
-			}
-			break;
 
-		default: 
-			state = mess_message;
-			break;
-	}
 
-	switch (state) { //actions
-		case mess_message:
-			i++;
-			break;
-	}
-	return state; 
-}
 
 //display 
 enum display_States { display_display }; 
